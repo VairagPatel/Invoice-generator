@@ -8,11 +8,11 @@
 		<version>3.4.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>in.bushansirgur</groupId>
+	<groupId>in.invoizo</groupId>
 	<artifactId>invoicegeneratorapi</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>invoicegeneratorapi</name>
-	<description>Spring Boot, Mongodb Invoice Generator API</description>
+	<version>2.0.0</version>
+	<name>invoizo-api</name>
+	<description>Invoizo - Modern Invoice Generator API with GST Support (Spring Boot, MongoDB)</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -76,6 +76,25 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+		<!-- Payment dependencies removed - using cash only -->
+		<!-- Apache POI for Excel export -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>5.2.5</version>
+		</dependency>
+		<!-- jqwik for property-based testing -->
+		<dependency>
+			<groupId>net.jqwik</groupId>
+			<artifactId>jqwik</artifactId>
+			<version>1.8.2</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 

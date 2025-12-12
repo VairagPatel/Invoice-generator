@@ -9,6 +9,10 @@ const Template2 = ({ data }) => {
             minimumFractionDigits: 2
         }).format(amount);
     };
+    
+    // Check if GST details are available
+    const hasGST = data.hasGST || false;
+    const isIntraState = data.transactionType === 'INTRA_STATE';
 
     return (
         <div className="template2 container border p-4 mt-4 template2-wrapper">
@@ -28,6 +32,7 @@ const Template2 = ({ data }) => {
                     <h6 className="fw-bold company-title">{data?.companyName}</h6>
                     <p className="mb-0">{data?.companyAddress}</p>
                     <p className="mb-0">{data?.companyPhone}</p>
+                    {data.companyGSTNumber && <p className="mb-0">GST No: {data.companyGSTNumber}</p>}
                 </div>
             </div>
 
@@ -55,6 +60,10 @@ const Template2 = ({ data }) => {
                         <th className="col template2-table-header">Item Description</th>
                         <th className="col template2-table-header">Qty</th>
                         <th className="col template2-table-header">Rate</th>
+                        {hasGST && <th className="col template2-table-header">GST %</th>}
+                        {hasGST && isIntraState && <th className="col template2-table-header">CGST</th>}
+                        {hasGST && isIntraState && <th className="col template2-table-header">SGST</th>}
+                        {hasGST && !isIntraState && <th className="col template2-table-header">IGST</th>}
                         <th className="col template2-table-header">Amount</th>
                     </tr>
                     </thead>
@@ -64,7 +73,11 @@ const Template2 = ({ data }) => {
                             <td>{item.name}</td>
                             <td>{item.qty}</td>
                             <td>{formatCurrency(item.amount)}</td>
-                            <td>{formatCurrency(item.qty * item.amount)}</td>
+                            {hasGST && <td>{item.gstRate || 0}%</td>}
+                            {hasGST && isIntraState && <td>{formatCurrency(item.cgstAmount || 0)}</td>}
+                            {hasGST && isIntraState && <td>{formatCurrency(item.sgstAmount || 0)}</td>}
+                            {hasGST && !isIntraState && <td>{formatCurrency(item.igstAmount || 0)}</td>}
+                            <td>{formatCurrency(hasGST && item.totalWithGST ? item.totalWithGST : item.qty * item.amount)}</td>
                         </tr>
                     ))}
                     </tbody>
@@ -74,8 +87,25 @@ const Template2 = ({ data }) => {
             {/* Summary */}
             <div className="d-flex justify-content-end mt-3">
                 <div className="text-end">
+                    {data.transactionType && (
+                        <p className="mb-1"><strong>Transaction Type:</strong> {data.transactionType === 'INTRA_STATE' ? 'Intra-State' : 'Inter-State'}</p>
+                    )}
                     <p className="mb-1"><strong>Sub Total:</strong> {formatCurrency(data?.subtotal || 0)}</p>
-                    <p className="mb-1"><strong>Tax ({data?.tax || 0}%):</strong> {formatCurrency(data?.taxAmount || 0)}</p>
+                    {hasGST ? (
+                        <>
+                            {isIntraState ? (
+                                <>
+                                    <p className="mb-1"><strong>CGST:</strong> {formatCurrency(data?.cgstTotal || 0)}</p>
+                                    <p className="mb-1"><strong>SGST:</strong> {formatCurrency(data?.sgstTotal || 0)}</p>
+                                </>
+                            ) : (
+                                <p className="mb-1"><strong>IGST:</strong> {formatCurrency(data?.igstTotal || 0)}</p>
+                            )}
+                            <p className="mb-1"><strong>Total GST:</strong> {formatCurrency(data?.gstTotal || 0)}</p>
+                        </>
+                    ) : (
+                        <p className="mb-1"><strong>Tax ({data?.tax || 0}%):</strong> {formatCurrency(data?.taxAmount || 0)}</p>
+                    )}
                     <p className="fw-bold text-success fs-5">Total Due: {formatCurrency(data?.total || 0)}</p>
                 </div>
             </div>
@@ -87,6 +117,38 @@ const Template2 = ({ data }) => {
                     {data.accountName && <p className="mb-1"><strong>Account Holder:</strong> {data.accountName}</p>}
                     {data.accountNumber && <p className="mb-1"><strong>Account Number:</strong> {data.accountNumber}</p>}
                     {data.accountIfscCode && <p className="mb-0"><strong>IFSC / Branch Code:</strong> {data.accountIfscCode}</p>}
+                </div>
+            )}
+
+            {/* Payment Options Section */}
+            {(data.paymentDetails?.paymentLink || data.paymentDetails?.cashPaymentAllowed) && (
+                <div className="mt-4">
+                    <h6 className="mb-2 text-success fw-semibold">Payment Options</h6>
+                    <div className="p-3 border rounded">
+                        {data.paymentDetails?.paymentLink && (
+                            <div className="mb-2">
+                                <p className="mb-1"><strong>Online Payment:</strong></p>
+                                <p className="mb-1 small">Pay securely using UPI, Cards, Net Banking, or Wallets</p>
+                                <p className="mb-0">
+                                    <strong>Payment Link:</strong>{" "}
+                                    <a 
+                                        href={data.paymentDetails.paymentLink} 
+                                        target="_blank" 
+                                        rel="noopener noreferrer"
+                                        className="text-success"
+                                    >
+                                        Click here to pay online
+                                    </a>
+                                </p>
+                            </div>
+                        )}
+                        {data.paymentDetails?.cashPaymentAllowed && (
+                            <div className="mb-0">
+                                <p className="mb-1"><strong>Cash Payment:</strong></p>
+                                <p className="mb-0 small">You can also pay by cash. Please inform us once the payment is made.</p>
+                            </div>
+                        )}
+                    </div>
                 </div>
             )}
 

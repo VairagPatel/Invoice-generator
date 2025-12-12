@@ -1,3 +1,23 @@
+.template5 {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 2px solid #a5f3fc !important;
+}
+
 .template5 tr.items-row, .template5 thead tr {
-    border-bottom: 2px solid black !important;
+    border-bottom: 2px solid #0891b2 !important;
+}
+
+.template5 h4, .template5 h5, .template5 h6 {
+    color: #0891b2;
+    font-weight: 600;
+}
+
+.template5 .template5-table-head {
+    background: linear-gradient(135deg, #0891b2, #0e7490) !important;
+    color: white !important;
+    font-weight: 600;
+}
+
+.template5 tbody tr:hover {
+    background-color: #ecfeff !important;
 }

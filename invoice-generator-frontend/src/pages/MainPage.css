@@ -1,0 +1,65 @@
+/* MainPage Modern Styling */
+.main-page-container {
+  background: linear-gradient(135deg, #f0fdfa 0%, #ecfeff 50%, #fef3c7 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+  padding: var(--space-8) 0;
+}
+
+.title-bar {
+  background: white;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-6);
+  margin-bottom: var(--space-6);
+  border: 2px solid var(--color-primary-200);
+  transition: all var(--transition-base);
+}
+
+.title-bar:hover {
+  box-shadow: var(--shadow-xl);
+  border-color: var(--color-primary-400);
+}
+
+.title-bar h5 {
+  background: linear-gradient(135deg, var(--color-primary-600), var(--color-accent-500));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: var(--font-weight-bold);
+  font-size: var(--text-2xl);
+}
+
+.title-bar .btn {
+  transition: all var(--transition-fast);
+}
+
+.title-bar .btn:hover {
+  transform: scale(1.1);
+}
+
+.form-section,
+.template-section {
+  background: white;
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-xl);
+  padding: 0;
+  border: 2px solid var(--color-primary-200);
+  transition: all var(--transition-base);
+  overflow: hidden;
+}
+
+.form-section:hover,
+.template-section:hover {
+  box-shadow: var(--shadow-2xl);
+  border-color: var(--color-primary-400);
+}
+
+.section-header {
+  background: linear-gradient(135deg, var(--color-primary-600), var(--color-primary-700));
+  color: white;
+  padding: var(--space-4) var(--space-6);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--text-lg);
+  border-bottom: 3px solid var(--color-accent-500);
+}

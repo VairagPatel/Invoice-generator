@@ -65,29 +65,100 @@ const PreviewPage = () => {
         useCORS: true,
         backgroundColor: "#fff",
         scrollY: -window.scrollY,
+        allowTaint: true,
+        foreignObjectRendering: false,
+        imageTimeout: 15000,
+        logging: false,
+        onclone: (clonedDoc) => {
+          // Remove problematic gradient styles from cloned document
+          const gradientElements = clonedDoc.querySelectorAll('.template5 h4, .template5 h5, .template5 h6');
+          gradientElements.forEach(el => {
+            el.style.background = 'none';
+            el.style.webkitBackgroundClip = 'initial';
+            el.style.webkitTextFillColor = 'initial';
+            el.style.backgroundClip = 'initial';
+            el.style.color = '#0891b2';
+          });
+        }
       });
 
       const imageData = canvas.toDataURL("image/png");
-      const thumbnailUrl = await uploadInvoiceThumbnail(imageData);
+      
+      // Try to upload thumbnail, but continue if it fails
+      let thumbnailUrl = null;
+      try {
+        thumbnailUrl = await uploadInvoiceThumbnail(imageData);
+      } catch (uploadError) {
+        console.warn("Thumbnail upload failed, continuing without thumbnail:", uploadError);
+        toast.error("Thumbnail upload failed, but invoice will be saved");
+      }
+
+      // Ensure all items have GST fields initialized
+      const sanitizedItems = invoiceData.items.map(item => ({
+        ...item,
+        gstRate: item.gstRate || 0,
+        cgstAmount: item.cgstAmount || 0,
+        sgstAmount: item.sgstAmount || 0,
+        igstAmount: item.igstAmount || 0,
+        totalWithGST: item.totalWithGST || (item.qty * item.amount)
+      }));
 
       const payload = {
         ...invoiceData,
+        items: sanitizedItems,
         clerkId: user.id,
         thumbnailUrl,
         template: selectedTemplate,
+        transactionType: invoiceData.transactionType || "INTRA_STATE",
       };
+      
+      // Only include companyGSTNumber if it's not empty
+      if (invoiceData.companyGSTNumber && invoiceData.companyGSTNumber.trim() !== '') {
+        payload.companyGSTNumber = invoiceData.companyGSTNumber.trim();
+      }
+      
+      console.log("Saving invoice with payload:", JSON.stringify(payload, null, 2));
       const token = await getToken();
       const response = await saveInvoice(baseURL, payload, token);
 
       if (response.status === 200) {
-        toast.success("Invoice saved successfully!");
+        const savedInvoice = response.data;
+        
+        // Automatically create payment link for the saved invoice
+        try {
+          const paymentService = await import('../service/paymentService');
+          const paymentToken = await getToken();
+          const paymentResponse = await paymentService.default.createPaymentLink(savedInvoice.id, paymentToken);
+          if (paymentResponse.success) {
+            toast.success("Invoice saved with payment link!");
+          } else {
+            toast.success("Invoice saved successfully!");
+          }
+        } catch (paymentError) {
+          console.warn("Payment link creation failed:", paymentError);
+          toast.success("Invoice saved successfully!");
+        }
+        
         navigate("/dashboard");
       } else {
         throw new Error("Save failed");
       }
     } catch (error) {
-      console.error(error);
-      toast.error("Failed to save invoice");
+      console.error("Save error:", error);
+      let errorMessage = "Failed to save invoice";
+      
+      if (error.response?.data) {
+        // If data is an object, try to extract message
+        if (typeof error.response.data === 'object') {
+          errorMessage = error.response.data.message || JSON.stringify(error.response.data);
+        } else {
+          errorMessage = error.response.data;
+        }
+      } else if (error.message) {
+        errorMessage = error.message;
+      }
+      
+      toast.error(String(errorMessage));
     } finally {
       setLoading(false);
     }
@@ -119,16 +190,21 @@ const PreviewPage = () => {
     try {
       setEmailing(true);
 
-      // Generate the PDF blob
+      // Generate the PDF blob and send
       const pdfBlob = await generatePdfFromElement(
         previewRef.current,
         `invoice_${Date.now()}.pdf`,
         true
-      ); // add `returnBlob=true` in your utils
+      );
 
       const formData = new FormData();
       formData.append("file", pdfBlob, `invoice_${Date.now()}.pdf`);
       formData.append("email", customerEmail);
+      
+      // Add invoice ID if available for payment link generation
+      if (invoiceData.id || invoiceData._id) {
+        formData.append("invoiceId", invoiceData.id || invoiceData._id);
+      }
 
       const token = await getToken();
 
@@ -211,9 +287,7 @@ const PreviewPage = () => {
             minHeight: "1123px",
             backgroundColor: "#fff",
             boxShadow: "0 0 8px rgba(0,0,0,0.15)",
-            margin: 0,
-            padding: 0,
-            overflow: "hidden",
+            margin: "0 auto",
           }}
         >
           <InvoicePreview
@@ -240,13 +314,16 @@ const PreviewPage = () => {
                 ></button>
               </div>
               <div className="modal-body">
-                <input
-                  type="email"
-                  className="form-control"
-                  placeholder="Customer Email"
-                  value={customerEmail}
-                  onChange={(e) => setCustomerEmail(e.target.value)}
-                />
+                <div className="mb-3">
+                  <label className="form-label">Customer Email</label>
+                  <input
+                    type="email"
+                    className="form-control"
+                    placeholder="customer@example.com"
+                    value={customerEmail}
+                    onChange={(e) => setCustomerEmail(e.target.value)}
+                  />
+                </div>
               </div>
               <div className="modal-footer">
                 <button

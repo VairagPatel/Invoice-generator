@@ -1,19 +1,50 @@
-/* template2.css */
+/* template2.css - Modern Teal Theme */
 .template2-wrapper {
     background-color: #ffffff;
     font-size: 0.95rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 2px solid #a5f3fc !important;
+}
+
+.template2 h2 {
+    background: linear-gradient(135deg, #0891b2, #06b6d4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.template2 h6 {
+    color: #0891b2 !important;
 }
 
 .notes-section {
-    background-color: #f0fdf4;
-    border-top: 3px solid #22c55e;
+    background: linear-gradient(135deg, #ecfeff, #fef3c7);
+    border-top: 3px solid #06b6d4;
+    border-radius: 8px;
 }
 
 .template2 .company-title {
-    color: #198754;
+    background: linear-gradient(135deg, #0891b2, #06b6d4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .template2 .template2-table-header {
-    background-color: #198754 !important;
+    background: linear-gradient(135deg, #0891b2, #0e7490) !important;
     color: white !important;
+    font-weight: 600;
+}
+
+.template2 .text-success {
+    color: #0891b2 !important;
+}
+
+.template2 .bg-success {
+    background: linear-gradient(135deg, #0891b2, #0e7490) !important;
+}
+
+.template2 .table tbody tr:hover {
+    background-color: #ecfeff !important;
 }

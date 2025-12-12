@@ -1,31 +1,55 @@
 .template3-container {
     max-width: 800px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 2px solid #a5f3fc !important;
 }
 
 .template3-heading {
-    color: #8a3ff3;
+    background: linear-gradient(135deg, #0891b2, #f59e0b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     font-size: 2rem;
     font-weight: bold;
 }
 
 .template3-subheading {
-    color: #8a3ff3;
+    color: #0891b2;
+    font-weight: 700;
+    border-bottom: 3px solid #06b6d4;
+    padding-bottom: 8px;
+    display: inline-block;
 }
 
 .template3-bill-box {
-    background-color: #f5f0ff;
+    background: linear-gradient(135deg, #ecfeff, #fef3c7);
+    border: 2px solid #a5f3fc;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.template3-bill-box:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(8, 145, 178, 0.15);
 }
 
 .template3-table-header {
-    background-color: #8a3ff3 !important;
+    background: linear-gradient(135deg, #0891b2, #0e7490) !important;
     color: white !important;
+    font-weight: 600;
 }
 
 .template3-total-box {
     width: 100%;
     max-width: 300px;
+    background: linear-gradient(135deg, #ecfeff, #fef3c7);
+    border: 2px solid #a5f3fc;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(8, 145, 178, 0.1);
 }
 
 .template3-total,.template3 .company-title {
-    color: #8a3ff3;
+    color: #0891b2;
+    font-weight: 700;
 }

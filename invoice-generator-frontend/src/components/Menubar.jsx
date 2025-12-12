@@ -7,7 +7,6 @@ import {
   SignedOut,
   useClerk,
   UserButton,
-  useUser,
 } from "@clerk/clerk-react";
 
 const Menubar = () => {
@@ -28,16 +27,16 @@ const Menubar = () => {
     openSignIn({});
   };
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+    <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top modern-navbar">
       <div className="container py-2">
         {/* Brand logo and name */}
-        <Link className="navbar-brand d-flex align-items-center" to="/">
+        <Link className="navbar-brand d-flex align-items-center brand-logo" to="/">
           <Logo />
           <span
-            className="fw-bolder fs-4 mx-3"
-            style={{ letterSpacing: "-0.5px", color: "#0D6EFDB2" }}
+            className="fw-bolder fs-4 mx-3 brand-text"
+            style={{ letterSpacing: "-0.5px" }}
           >
-            QuickInvoice
+            Invoizo
           </span>
         </Link>
         {/* Navbar toggler for smaller screens */}

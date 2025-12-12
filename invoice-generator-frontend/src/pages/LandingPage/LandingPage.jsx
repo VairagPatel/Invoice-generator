@@ -46,7 +46,7 @@ const LandingPage = () => {
                                 Effortless Invoicing. Professional Results.
                             </h1>
                             <p className="lead mb-5" style={{ fontSize: '1.3rem' }}>
-                                Stop wrestling with spreadsheets. QuickInvoice helps you create and send beautiful invoices in minutes, so you get paid faster.
+                                Stop wrestling with spreadsheets. Invoizo helps you create and send beautiful invoices with GST support in minutes, so you get paid faster.
                             </p>
                             <p>
                                 {/* Primary call to action */}
@@ -154,7 +154,7 @@ const LandingPage = () => {
             {/* Features Section: Highlights key benefits with images and text */}
             <section id="features" className="py-5">
                 <div className="container">
-                    <h2 className="text-center mb-5 display-5 fw-bold">Why Choose QuickInvoice?</h2>
+                    <h2 className="text-center mb-5 display-5 fw-bold">Why Choose Invoizo?</h2>
                     {/* Feature 1 */}
                     <div className="row align-items-center gy-4">
                         <div className="col-md-6">
@@ -250,12 +250,12 @@ const LandingPage = () => {
             </section>
 
             {/* Call to Action Section: Final prompt for users to start */}
-            <section id="generate-invoice" className="py-5 text-center bg-primary text-white">
+            <section id="generate-invoice" className="py-5 text-center modern-cta-section text-white">
                 <div className="container">
                     <h2 className="display-5 fw-bold mb-3">Ready to Streamline Your Invoicing?</h2>
                     <p className="lead mb-4 mx-auto" style={{ maxWidth: '600px' }}>
-                        Join thousands of freelancers and small businesses who trust QuickInvoice.
-                        Start creating professional invoices today – its fast, easy, and effective!
+                        Join thousands of freelancers and small businesses who trust Invoizo.
+                        Start creating professional invoices with GST support today – its fast, easy, and effective!
                     </p>
                     <button className="btn btn-lg btn-warning fw-bold rounded-pill px-5 py-3" onClick={handleActionButton}>
                         Start Generating Invoices Now
@@ -267,12 +267,12 @@ const LandingPage = () => {
             </section>
 
             {/* Footer: Copyright and social media links */}
-            <footer className="py-5 bg-dark text-white-50">
+            <footer className="py-5 modern-footer">
                 <div className="container text-center">
                     <Logo />
-                    <p className="text-white fw-bold mt-2">QuickInvoice</p>
+                    <p className="text-white fw-bold mt-2">Invoizo</p>
                     <p className="mb-0">
-                        &copy; {new Date().getFullYear()} QuickInvoice. All Rights Reserved.
+                        &copy; {new Date().getFullYear()} Invoizo. All Rights Reserved.
                     </p>
                     <p className="mb-0 small">
                         Crafted with <i className="bi bi-heart-fill text-danger"></i> for freelancers and small businesses.

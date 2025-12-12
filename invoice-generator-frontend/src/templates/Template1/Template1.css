@@ -1,45 +1,101 @@
-/* template1.css */
+/* template1.css - Modern Teal/Cyan Theme */
+
+.template1 {
+    background: white;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
 
 .w-800 {
     max-width: 800px;
 }
 
 .company-title {
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 20px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #0891b2, #06b6d4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .invoice-title {
-    color: #ea580c;
-    font-size: 28px;
-    font-weight: bold;
+    background: linear-gradient(135deg, #0891b2, #f59e0b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 32px;
+    font-weight: 800;
 }
 
 .billing-title {
-    color: #ea580c;
-    font-size: 16px;
-    font-weight: bold;
+    color: #0891b2;
+    font-size: 18px;
+    font-weight: 700;
+    border-bottom: 3px solid #06b6d4;
+    padding-bottom: 8px;
+    display: inline-block;
 }
 
 .orange-border {
-    border-color: #ea580c !important;
+    border: none !important;
+    height: 3px;
+    background: linear-gradient(90deg, #0891b2, #f59e0b);
 }
 
 .billing-box {
-    background-color: #fff7ed;
+    background: linear-gradient(135deg, #ecfeff, #fef3c7);
+    border: 2px solid #a5f3fc;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.billing-box:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(8, 145, 178, 0.15);
 }
 
 .table-header {
-    background-color: #ea580c !important;
+    background: linear-gradient(135deg, #0891b2, #0e7490) !important;
     color: white !important;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+}
+
+.template1 .table {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.template1 .table tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+.template1 .table tbody tr:hover {
+    background-color: #ecfeff;
 }
 
 .totals-box {
     font-size: 16px;
-    font-weight: bold;
-    background-color: #fff7ed;
+    font-weight: 600;
+    background: linear-gradient(135deg, #ecfeff, #fef3c7);
+    border: 2px solid #a5f3fc;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(8, 145, 178, 0.1);
 }
 
-.total-highlight,.template1 .company-title {
-    color: #ea580c;
+.total-highlight {
+    color: #0891b2;
+    font-size: 20px;
+    padding-top: 12px;
+    border-top: 2px solid #06b6d4;
+}
+
+.template1 .company-title {
+    background: linear-gradient(135deg, #0891b2, #06b6d4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }

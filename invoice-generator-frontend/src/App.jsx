@@ -5,6 +5,8 @@ import { Toaster } from "react-hot-toast";
 import Dashboard from "./pages/Dashboard.jsx";
 import Menubar from "./components/Menubar.jsx";
 import LandingPage from "./pages/LandingPage/LandingPage.jsx";
+import PaymentSuccess from "./pages/PaymentSuccess.jsx";
+import TestPayment from "./pages/TestPayment.jsx";
 import UserSyncHandler from "./components/UserSyncHandler.jsx";
 import { RedirectToSignIn, SignedIn, SignedOut } from "@clerk/clerk-react";
 
@@ -52,6 +54,24 @@ function App() {
             <>
               <SignedIn>
                 <PreviewPage />
+              </SignedIn>
+              <SignedOut>
+                <RedirectToSignIn />
+              </SignedOut>
+            </>
+          }
+        />
+        
+        {/* Payment Success Route - Public but requires payment params */}
+        <Route path="/payment/success" element={<PaymentSuccess />} />
+        
+        {/* Test Payment Route - Protected */}
+        <Route
+          path="/test-payment"
+          element={
+            <>
+              <SignedIn>
+                <TestPayment />
               </SignedIn>
               <SignedOut>
                 <RedirectToSignIn />

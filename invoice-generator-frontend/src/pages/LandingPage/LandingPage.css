@@ -1,14 +1,33 @@
 /* Hero section styling */
 .hero-section {
-    /* Gradient overlay for better text visibility on background image */
-    background: linear-gradient(rgba(13, 110, 253, 0.80), rgba(13, 110, 253, 0.70)),
+    /* Modern gradient with teal and cyan theme */
+    background: linear-gradient(135deg, rgba(8, 145, 178, 0.95), rgba(6, 182, 212, 0.90)),
     url('[https://placehold.co/1920x1080/495057/dee2e6?text=Modern+Digital+Workspace](https://placehold.co/1920x1080/495057/dee2e6?text=Modern+Digital+Workspace)') no-repeat center center;
     background-size: cover;
-    color: #ffffff; /* Ensure text is white */
+    color: #ffffff;
+    position: relative;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 20% 50%, rgba(34, 211, 238, 0.2), transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(251, 191, 36, 0.15), transparent 50%);
+    pointer-events: none;
+}
+
+.hero-section .container {
+    position: relative;
+    z-index: 1;
 }
 
 .hero-section h1 {
-    font-weight: 900; /* Extra bold for hero title */
+    font-weight: 900;
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
 }
 
 /* Navbar brand styling */
@@ -34,21 +53,33 @@
     object-fit: cover; /* Ensure images cover the area nicely */
 }
 
-/* Soft background colors for step icon containers for visual differentiation */
-.bg-primary-soft { background-color: rgba(13, 110, 253, 0.1); }
-.bg-success-soft { background-color: rgba(25, 135, 84, 0.1); }
-.bg-warning-soft { background-color: rgba(255, 193, 7, 0.15); }
-.bg-info-soft { background-color: rgba(13, 202, 240, 0.1); }
+/* Modern soft background colors for step icon containers */
+.bg-primary-soft { 
+    background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(34, 211, 238, 0.15));
+}
+.bg-success-soft { 
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(52, 211, 153, 0.15));
+}
+.bg-warning-soft { 
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.15), rgba(252, 211, 77, 0.2));
+}
+.bg-info-soft { 
+    background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(103, 232, 249, 0.15));
+}
 
-/* Button styling adjustments */
+/* Modern button styling */
 .btn-warning {
-    color: #000000; /* Ensure text is dark on yellow for accessibility */
-    border-width: 2px; /* Slightly bolder border */
+    color: #000000;
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    border: none;
+    box-shadow: 0 4px 15px rgba(251, 191, 36, 0.3);
+    transition: all 0.3s ease;
 }
 .btn-warning:hover {
     color: #000000;
-    background-color: #ffca2c; /* Lighter yellow on hover */
-    border-color: #ffc720;
+    background: linear-gradient(135deg, #fcd34d, #fbbf24);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(251, 191, 36, 0.4);
 }
 
 .btn-outline-light {
@@ -63,17 +94,110 @@
     font-weight: 500; /* Medium weight for button text */
 }
 
-/* Footer icon styling */
-footer a i { /* Simplified and corrected selector for footer icons */
-    font-size: 1.25rem;
-    transition: color 0.2s ease-in-out;
+/* Modern Call to Action Section */
+.modern-cta-section {
+    background: linear-gradient(135deg, #0891b2 0%, #06b6d4 50%, #22d3ee 100%);
+    position: relative;
+    overflow: hidden;
 }
-footer a:hover i { /* Simplified and corrected selector for footer icons */
-    color: #ffffff !important; /* White color on hover for better visibility */
+
+.modern-cta-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(251, 191, 36, 0.15), transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(34, 211, 238, 0.2), transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.05), transparent 60%);
+    pointer-events: none;
+}
+
+.modern-cta-section .container {
+    position: relative;
+    z-index: 1;
+}
+
+.modern-cta-section h2 {
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.15);
+}
+
+.modern-cta-section .lead {
+    text-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
+}
+
+.modern-cta-section .btn-warning {
+    box-shadow: 0 8px 25px rgba(251, 191, 36, 0.4);
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+    0%, 100% {
+        box-shadow: 0 8px 25px rgba(251, 191, 36, 0.4);
+    }
+    50% {
+        box-shadow: 0 8px 35px rgba(251, 191, 36, 0.6);
+    }
+}
+
+.modern-cta-section .btn-warning:hover {
+    box-shadow: 0 12px 40px rgba(251, 191, 36, 0.6);
+    animation: none;
+}
+
+/* Modern Footer Styling */
+.modern-footer {
+    background: linear-gradient(135deg, #0e7490 0%, #0891b2 50%, #164e63 100%);
+    color: rgba(255, 255, 255, 0.9);
+    position: relative;
+    overflow: hidden;
+}
+
+.modern-footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 30% 50%, rgba(34, 211, 238, 0.1), transparent 50%),
+                radial-gradient(circle at 70% 50%, rgba(251, 191, 36, 0.08), transparent 50%);
+    pointer-events: none;
+}
+
+.modern-footer .container {
+    position: relative;
+    z-index: 1;
+}
+
+.modern-footer p {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.modern-footer .text-white {
+    color: #ffffff !important;
+}
+
+/* Footer icon styling */
+footer a i {
+    font-size: 1.25rem;
+    transition: all 0.3s ease-in-out;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+footer a:hover i {
+    color: #fbbf24 !important;
+    transform: scale(1.2);
 }
 
 #features h2, h3 {
-    color: #0D6EFDB2;
+    color: #0891b2;
+    background: linear-gradient(135deg, #0891b2, #06b6d4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 /* Responsive adjustments for various screen sizes */
